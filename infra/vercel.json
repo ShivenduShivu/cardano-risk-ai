@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "cardano-risk-ai-frontend",
+  "builds": [
+    { "src": "frontend/index.html", "use": "@vercel/static" },
+    { "src": "frontend/app.js", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/frontend/index.html" }
+  ]
+}
