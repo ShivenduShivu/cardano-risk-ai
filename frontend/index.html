@@ -1,0 +1,37 @@
+<!-- frontend/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cardano Risk AI — MVP</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial; background:#f6f8fa; color:#111; padding:2rem;}
+    .card { background: white; border-radius:12px; padding:1.2rem; box-shadow: 0 6px 18px rgba(15,15,15,0.08); max-width:800px; margin:0 auto;}
+    input, button { font-size:1rem; padding:0.5rem; }
+    .row { display:flex; gap:0.5rem; margin-bottom:1rem; }
+    .pre { white-space:pre-wrap; background:#f1f3f5; padding:0.8rem; border-radius:8px; font-family:monospace; }
+    .score { font-weight:700; font-size:1.4rem; }
+    .low { color:green; } .med { color:orange; } .high { color:red; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Cardano Risk AI — MVP</h1>
+    <p>Paste a Cardano transaction hash (testnet) and get metadata + anomaly risk score.</p>
+
+    <div class="row">
+      <input id="txhash" placeholder="Enter tx hash (or leave to use mock)" style="flex:1" />
+      <button id="btnFetch">Fetch & Score</button>
+    </div>
+
+    <div id="status" class="pre">Status: idle</div>
+
+    <h3>Result</h3>
+    <div id="result" class="pre">No result yet.</div>
+  </div>
+
+  <!-- Load the JS from /static so our API routes are not shadowed -->
+  <script src="/static/app.js"></script>
+</body>
+</html>
