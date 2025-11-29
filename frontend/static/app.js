@@ -1,24 +1,20 @@
 // frontend/app.js
-// Simple client to call backend endpoints. By default expects backend at same origin under /.
-// If backend is separate, set BACKEND_URL environment variable in Vercel or edit below.
-const BACKEND_URL = (typeof BACKEND_URL !== "undefined" && BACKEND_URL) || ""; // leave empty => same origin
+// Backend URL: default to localhost:8000 (Codespaces). Override by setting window.BACKEND_URL in browser or editing this file.
+const BACKEND_URL = (typeof window !== "undefined" && window.BACKEND_URL) ? window.BACKEND_URL : "http://127.0.0.1:8000";
 
 function $(id){ return document.getElementById(id); }
 
 async function fetchJSON(path){
-  const url = (BACKEND_URL || "") + path;
+  const url = BACKEND_URL + path;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`HTTP ${res.status}: ${text}`);
+  }
   return await res.json();
 }
 
 function setStatus(msg){ $("status").textContent = "Status: " + msg; }
-
-function riskClass(label){
-  if (label==="LOW") return "low";
-  if (label==="MEDIUM") return "med";
-  return "high";
-}
 
 $("btnFetch").addEventListener("click", async () => {
   const tx = $("txhash").value.trim() || "mock_tx_123";
@@ -44,8 +40,8 @@ $("btnFetch").addEventListener("click", async () => {
     $("result").textContent = out.join("\n");
     setStatus("done");
   } catch (err) {
-    setStatus("error");
+    setStatus("error: " + err.message);
     $("result").textContent = "Error: " + err.message;
+    console.error("Fetch error", err);
   }
 });
-
