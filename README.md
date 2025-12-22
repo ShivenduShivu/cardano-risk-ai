@@ -1,4 +1,4 @@
-# Cardano Risk AI — Hackathon MVP
+# Cardano Risk AI — Hackathon MVP(There are some issues at the moment in the deployment I am trying to sort it out Soon)
 
 Quick start checklist (Codespaces, offline-friendly):
 
